@@ -34,7 +34,7 @@ class: title-slide, middle, center
 ## Fundamentals of Computational Biology
 ### BSc on Human Biology
 ### UPF School of Health and Life Sciences
-### Academic Year 2021-2022
+### Academic Year 2022-2023
 
 ---
 
@@ -225,9 +225,7 @@ Fig. 5 from [S. Chacon and B. Straub. _Pro Git_, Apress](https://git-scm.com/boo
   $ git log
   </pre>
 * These and other basic Git commands and concepts are explained in depth
-  in the
-  [Git Pro](https://git-scm.com/book/en/Git-Basics-Getting-a-Git-Repository)
-  book.
+  in the [Pro Git](https://git-scm.com/book) book.
 
 ---
 
@@ -371,7 +369,7 @@ Fig. 16 from [S. Chacon and B. Straub. _Pro Git_, Apress](https://git-scm.com/bo
   acquired by [Microsoft](https://microsoft.com).  
   &nbsp;&nbsp;
 * GitHub provides
-  [social media-like features](https://guides.github.com/activities/socialize)
+  [social media-like features](https://docs.github.com/en/get-started/quickstart/be-social)
   that allow users to do different kinds of interactions, such as:
   * Open **issues** in a repository to report bugs, ask questions or request new features.
   * **Fork** a repository from a different user to introduce your own changes.
@@ -380,7 +378,7 @@ Fig. 16 from [S. Chacon and B. Straub. _Pro Git_, Apress](https://git-scm.com/bo
   * **Follow** updates from other users.
   * **Stargaze** repositories from other users.
 * According to its [Wikipedia page](https://en.wikipedia.org/wiki/GitHub),
-  GitHub has as of April 2020, over 40 million users and more than 190 million
+  GitHub has as of June 2022, over 83 million users and more than 200 million
   repositories, making it the largest host of source code in the world.
 
 ---
@@ -419,7 +417,32 @@ Fig. 16 from [S. Chacon and B. Straub. _Pro Git_, Apress](https://git-scm.com/bo
 * Using a remote repository in GitHub enables social coding features that
   facilitate and speed up team work.  
   &nbsp;&nbsp;
+* The [Pro Git book](https://git-scm.com/book) is freely accessible online
+  and contains all details about Git. It includes translations to several
+  languages, including [Spanish](https://git-scm.com/book/es).  
+  &nbsp;&nbsp;
 * Git and GitHub have become an academic and industry standard for hosting
   software development and distribution. Knowing how to use them is an
   increasingly appreciated skill in both, the academic and the industry
   environments.
+
+---
+
+## GitHub branding with the Octocat
+
+.pull-left[
+* Long before GitHub was bought in 2018 by Microsoft for 7.5 billion dollar,
+  [Simon Oxley](https://en.wikipedia.org/wiki/Simon_Oxley), the designer of
+  the [Twitter logo](https://about.twitter.com/en/who-we-are/brand-toolkit),
+  made a creation called the "Octopuss" (combination of octopus and pussycat)
+  and put it for sale at the [iStockphoto website](https://www.istockphoto.com).
+]
+.pull-right[
+![:scale 80%](img/octocat.jpg)
+]
+* GitHub bought this original "Octopuss" to put use it in a fun error page for
+  their website and with the help of [Cameron McEfee](https://cameronmcefee.com)
+  rename it as the "Octocat" and turn it into a worldwide (nerdy) brand. Full
+  story [here](https://cameronmcefee.com/work/the-octocat).
+
+  ![](img/404.jpg)
