@@ -1,5 +1,5 @@
 ---
-  title: "Version control and social coding"
+  title: "Programming with Python (1)"
   author: Robert Castelo
   output:
     xaringan::moon_reader:
@@ -22,7 +22,7 @@ knitr::knit_hooks$set(small.mar=function(before, options, envir) {
 
 class: title-slide, middle, center
 
-# Version control and social coding
+# Programming with Python (1)
 
 ## Robert Castelo
 [robert.castelo@upf.edu](mailto:robert.castelo@upf.edu)
@@ -34,415 +34,412 @@ class: title-slide, middle, center
 ## Fundamentals of Computational Biology
 ### BSc on Human Biology
 ### UPF School of Health and Life Sciences
-### Academic Year 2022-2023
+### Academic Year 2023-2024
 
 ---
 
-## Document versioning
+## What's an algorithm
 
-* Document versioning: keeping different versions of the same document.  
+* **Action**: an event that takes place in a finite period of time and produces
+  an expected and well-defined result.  
   &nbsp;&nbsp;
-* Using multiple files with different names is often the way to keep different
-  versions of the same document.  
+--
+
+* **Information**: anything we can observe or find out about an action.  
   &nbsp;&nbsp;
-* Following up the most recent version of a document or recovering a specific
-  version becomes difficult and error prone.
+--
 
-.pull-left[![](img/filenamingdocx.png)]
-.pull-right[![:scale 50%](img/xkcdnamingfiles.png)]
+* **State**: the information available at a given time point.  
+  &nbsp;&nbsp;
+--
 
+* **Algorithm**: sequence of actions starting at an initial state and ending at
+  an end state, in which we obtain the result.
+--
+
+![:scale 55%](img/gestiocasoscovid19.png)
 .footer[
-Right image from [xkcd](https://xkcd.com/1459)
-]
-
-
----
-
-## Document comparison
-
-* We may want to keep track not only of our own edits but of the edits of
-  other individuals on the same document.  
-  &nbsp;&nbsp;
-* Current word processing software incorporates automatic ways of
-  [document comparison](https://en.wikipedia.org/wiki/Document_comparison)
-  that allows one to keep track of how the document is being edited and
-  eventually accept or reject those edits.
-
-![:scale 60%](img/MSWordTrackChanges.png)
-
-.footer[
-Image from "How to track changes in Microsoft Word without going insane".
-[PC World, Feb 4, 2015](https://www.pcworld.com/article/2861859/how-to-track-changes-in-microsoft-word-without-going-insane.html)]
-
----
-
-## Version control systems (VCS)
-
-
-* In software development, projects can involve a very large number
-  of files, which change constantly as a result of that process.  
-  &nbsp;&nbsp;
-* To handle different versions of files and their concurrent alterations,
-  software tools called
-  [version control systems (VCS)](https://en.wikipedia.org/wiki/Version_control)
-  have been developed.  
-  &nbsp;&nbsp;
-* VCS provide two fundamental features:
-  1. Track changes on files over time with the possibility of reverting to
-     earlier versions.
-  2. Manage changes and conflicts introduced by multiple individuals on the
-     same files.
-* There are different VCS, which can be classified in centralized and
-  distributed. Some of the most well-known are:
-  * [CVS](https://en.wikipedia.org/wiki/Concurrent_Versions_System)
-  * [SVN](https://en.wikipedia.org/wiki/Apache_Subversion)
-  * [Git](https://en.wikipedia.org/wiki/Git)
-  * [Mercurial](https://en.wikipedia.org/wiki/Mercurial)
-
----
-
-## Centralized VCS
-
-
-* A centralized VCS, such as CVS or SVN, keeps a database in a single remote
-  computer server, which records all changes to files.  
-  &nbsp;&nbsp;
-* If the computer server storing the database goes down you cannot use the
-  system and if it breaks, you loose everything.  
-
-![:scale 60%](img/centralizedVCS.png)
-
-.footer[
-Fig. 2 from [S. Chacon and B. Straub. _Pro Git_, Apress](https://git-scm.com/book/en/v2).
+[Gestió de casos COVID-19 als centres educatius](https://documents.espai.educacio.gencat.cat/IPCNormativa/Protocol-Gestio-casos-rev.pdf),
+Dept. de Salut, Generalitat de Catalunya, 9 de setembre de 2020.
 ]
 
 ---
 
-## Distributed VCS
+## What's a software program
 
-* A distributed VCS, such as Git or Mercurial, keeps the whole database of
-  changes to files in every computer from where you use the system.  
+* Building an algorithm consists of (1) discovering which elementary actions have
+  to occur and (2) how they should be organised throughout time, to obtain the
+  result.  
   &nbsp;&nbsp;
-* To synchronize changes with other collaborators you can use one or more
-  remote computer servers, where all, the remote servers and each collaborator,
-  keeps the whole version database.
+--
 
-![:scale 40%](img/distributedVCS.png)
-
-.footer[
-Fig. 3 from [S. Chacon and B. Straub. _Pro Git_, Apress](https://git-scm.com/book/en).
-]
-
----
-
-## The Git VCS
-
-* The [Git](https://en.wikipedia.org/wiki/Git) VCS was created in 2005 by
-  [Linus Torvalds](https://en.wikipedia.org/wiki/Linus_Torvalds), the original
-  developer of the [Linux kernel](https://en.wikipedia.org/wiki/Linux_kernel),
-  to help managing the changes to the files forming the Linux kernel software.  
+* Such an exercise requires:
+  * Ability for **abstract thought** and **procedural abstraction** at
+    different levels.
+  * Using a language with precise syntax and notation.
+  * Problem solving.
+* **Abstraction:** focus attention on the main problem, ignoring
+  lower-level details.  
   &nbsp;&nbsp;
-* The main features of Git are:
-  * Speed.
-  * Scalability.
-  * Branching.
-* Git takes a snapshot of all the files under version control, each time you
-[commit](https://en.wikipedia.org/wiki/Commit_%28version_control%29) a change. Versions
-can be seen as a stream of commit snapshots.
-
-![:scale 60%](img/gitsnapshots.png)
-
-.footer[
-Fig. 5 from [S. Chacon and B. Straub. _Pro Git_, Apress](https://git-scm.com/book/en).
-]
-
----
-
-## Basic concepts of Git
-
-* To put a directory under version control with Git, creating a so-called _Git repository_
-  or _Git repo_, you enter that directory and type `git init` **once**:
-  <pre>
-  $ mkdir project
-  $ cd project
-  $ git init
-  Initialized empty Git repository in /Users/robert/project/.git/
-  $ ls -aF
-  ./    ../   .git/ 
-  $ ls .git
-  HEAD        description info        refs
-  config      hooks       objects
-  </pre>
-* Any existing files or directories, or newly created ones, will also go under Git
-  version control. The database of changes is stored in the (hidden) directory `.git`.
-
----
-
-## Basic concepts of Git
-
-* A file under version control with Git is in one out of three possible states:
-  * **Modified**: file has changed, but is still not marked it for recording
-    that change.
-  * **Staged**: a modified file that is marked.
-  * **Commited**: a previously marked file that has been copied into the
-    database.
-* To put files and directories, or their modifications, under version control
-  you need to _stage them_ and _commit them_.  
+* **Procedural abstraction:** understand what a procedure should do
+  without knowing exactly it how does it.  
   &nbsp;&nbsp;
-* To _stage_ files you use the `add` command to mark modified files:
+--
+
+* Writing a software program is **implementing** an algorithm in a
+  specific programming language.
+
+---
+
+## Literals, constants and variables
+
+
+* [Literal](https://en.wikipedia.org/wiki/Literal_%28computer_programming%29):
+  value that does not change over time, e.g.:  
   <pre>
-  git add filenames
+  3.1416, 1, 2, 3, "Hello World!", ...
   </pre>
-* If you want to stage every modified file, then from the top of the git repo, type:
+* [Constant](https://en.wikipedia.org/wiki/Constant_%28computer_programming%29):
+  named literal, a value that does not change over time but which we refer to it
+  by a given name, typically written in upper case letters, e.g.:  
   <pre>
-  git add .
+  PI, A, B, C, ...
   </pre>
-* To _commit_ files you type:
+* [Variable](https://en.wikipedia.org/wiki/Variable_%28computer_science%29):
+  named container storing a value, which may change over time, e.g.:  
   <pre>
-  git commit -m 'Update on xxx.'
+  x, y, z, i, j, k, ...
+  </pre>
+* Constant and variable names should consist of letters and/or digits, but
+  they should not start with a digit. Underscores are allowed. E.g.:  
+  <pre>
+  x1, y1, A4, result2, sum_of_squares, ...
   </pre>
 
 ---
 
-## Basic concepts of Git
+## Assignments
 
-
-* To remove files and directories, you remove them using the Unix `rm` command
-  and then _stage_ those changes with:
+* [Assignment](https://en.wikipedia.org/wiki/Assignment_%28computer_science%29):
+  statement that sets the value of a variable using an operator, `=` in Python,
+  for instance:  
   <pre>
-  $ git add .
+  x = 1
+  x = 2
   </pre>
-* To check the status of files in a git repo you can use the `status` command:
+* In an assignment, the left-hand side of the assignment operator is always a
+variable, while the right-hand side is what we want to assign into the variable.
+![:scale 40%](img/assignment.jpg)
+
+---
+
+class: small-table
+
+## Expressions
+
+* [Expression](https://en.wikipedia.org/wiki/Expression_%28computer_science%29):
+  syntactically correct specification of one or more operations over any given
+  set of literals, constants, variables or functions. E.g.:  
   <pre>
-  $ git status
-  On branch master
-  No commits yet
-  nothing to commit (create/copy files and use "git add" to track)
+  1 + 1
+  x + 2
+  y / 2
   </pre>
-* To browse through the list of commits in a git repo you can use the `log`
-  command:
+* The right-hand side of an assignment can be an expression:  
   <pre>
-  $ git log
+  x = x + 1
+  y = ( log(100) - x ) / 3
   </pre>
-* These and other basic Git commands and concepts are explained in depth
-  in the [Pro Git](https://git-scm.com/book) book.
+* Arithmetic operators
+
+|   Operator           |  Example  |  Result |
+|--------------------- | :-------: | :-----: |
+| addition             |   2 + 2   |    4    |
+| subtraction          |   3 - 2   |    1    |
+| multiplication       |   3 * 2   |    6    |
+| division (quotient)  |   6 / 3   |    2    |
+| division (remainder) |   6 % 4   |    2    |
 
 ---
 
-## Git branching
+## Control flow
 
-* Git records commit snapshots by keeping track of which commits came after each other.
-
-![:scale 100%](img/commits-and-parents.png)
-
-.footer[
-Fig. 10 from [S. Chacon and B. Straub. _Pro Git_, Apress](https://git-scm.com/book/en).
-]
-
----
-
-## Git branching
-
-* A branch is a pointer to one commit. There is at least a default branch, until recently
-called `master`, which points to the last commit made.
-
-![:scale 100%](img/master-branch.png)
-
-<pre>
-$ git status
-On branch master
-No commits yet
-nothing to commit (create/copy files and use "git add" to track)
-</pre>
-
-.footer[
-Adapted from Fig. 12 from [S. Chacon and B. Straub. _Pro Git_, Apress](https://git-scm.com/book/en).
-]
-
----
-
-## Git branching
-
-* You can add a branch, for instance, to test a new feature in your software.
-  This is how we would create a branch called `testing` for such a purpose:
-  <pre>
-  $ git branch testing
-  </pre>
-
-![:scale 100%](img/two-branches.png)
-
-.footer[
-Fig. 12 from [S. Chacon and B. Straub. _Pro Git_, Apress](https://git-scm.com/book/en).
-]
-
----
-
-## Git branching
-
-* The current branch `master`, where you can _stage_ and _commit_ changes, is
-  selected by a special pointer called `HEAD`.
-
-![:scale 100%](img/head-to-master.png)
-
-.footer[
-Fig. 13 from [S. Chacon and B. Straub. _Pro Git_, Apress](https://git-scm.com/book/en).
-]
-
----
-
-## Git branching
-
-* We can switch from the current branch `master` to the one created called
-  `testing` by doing:
-  <pre>
-  $ git checkout testing
-  </pre>
-
-![:scale 100%](img/head-to-testing.png)
-
-.footer[
-Fig. 14 from [S. Chacon and B. Straub. _Pro Git_, Apress](https://git-scm.com/book/en).
-]
-
----
-
-## Git branching
-
-* In the `testing` branch we modify files and we may want to commit those
-  changes. When we do that, the currently selected branch `testing` moves
-  forward.
-  <pre>
-  $ git add .
-  $ git commit -m 'Added new feature'
-  </pre>
-
-![:scale 100%](img/advance-testing.png)
-
-.footer[
-Fig. 15 from [S. Chacon and B. Straub. _Pro Git_, Apress](https://git-scm.com/book/en).
-]
-
----
-
-## Git branching
-
-* If we are happy with the changes we have made in the `testing` branch, we may
-  want to _merge_ them into the default branch `master`.  
+* When we run an algorithm, there is a flow of actions being executed after
+  one another.  
   &nbsp;&nbsp;
-* We should first switch back to the `master` branch. Such an action will revert
-  the files in the working directory back to the snapshot that the `master`
-  branch points to.
+* The course of the flow of execution depends on the so-called
+  [control flow](https://en.wikipedia.org/wiki/Control_flow) statements.  
+  &nbsp;&nbsp;
+* There are three main types of control flow statements:
+  * Sequential: actions are executed in a particular order.  
+    &nbsp;&nbsp;
+  * Conditional: one or more actions are executed only under a specific
+    condition.  
+    &nbsp;&nbsp;
+  * Iterative: one or more actions are executed multiple times until a specific
+    condition is met.  
+  &nbsp;&nbsp;
+* In the next slides we will be using Python syntax to illustrate these
+  control flow statements.
+
+---
+
+class: small-table
+
+## Control flow
+
+* Comparison operators: operators that compare two values and return a truth value,
+either `true` or `false`.
+
+|    Description        |  Operator |
+|---------------------- | :-------: |
+|     equality          |    ==     |
+|    inequality         |    !=     |
+|    greater than       |    >      |
+|    smaller than       |    <      |
+| greater or equal than |    >=     |
+| smaller or equal than |    <=     |
+* `2 > 1` is `true`.  
+  &nbsp;&nbsp;
+* `2 < 1` is `false`.  
+  &nbsp;&nbsp;
+* `x > 0` will be `true` or `false` depending on the actual value of `x`.
+
+---
+
+## Control flow
+
+* Sequential control flow:  
   <pre>
-  $ git checkout master
+  a = 2
+  b = a
+  b = b + a * 4
+  print(b)
+  </pre>
+* The `print(b)` instruction will print the value of `b` in the terminal window.
+Think about what value is going to print in the previous code and in each of the
+two code blocks below.
+  <pre>
+  a = 2
+  b = a
+  print(b)
+  b = b + a * 4
+  </pre>
+  <pre>
+  a = 2
+  print(b)
+  b = a
+  b = b + a * 4
   </pre>
 
-![:scale 100%](img/checkout-master.png)
+---
 
-.footer[
-Fig. 16 from [S. Chacon and B. Straub. _Pro Git_, Apress](https://git-scm.com/book/en).
+## Control flow
+
+* Conditional control flow, also known as an "if statement":  
+  <pre>
+  a = 4
+  b = 7
+  c = (a * b) + 1
+  &nbsp;&nbsp;
+  if a % 2 == 0 :
+    print("even")
+  else :
+    print("odd")
+  </pre>
+* Code blocks associated with an `if` statement are defined by
+  [whitespace](https://en.wikipedia.org/wiki/Whitespace_character)
+  characters beginning each line of the associated code block. This
+  is known in computer programming as
+  [indentation](https://en.wikipedia.org/wiki/Indentation_style).
+  Other programming languages (e.g.,
+  [C](https://en.wikipedia.org/wiki/C_%28programming_language%29),
+  [Perl](https://en.wikipedia.org/wiki/Perl)
+  or [JavaScript](https://en.wikipedia.org/wiki/JavaScript)) use
+  curly braces, `{` and `}`, to define code blocks.  
+  &nbsp;&nbsp;
+* Programming languages, such as Python, which use indentation
+  to define code blocks are said to adhere to the
+  [off-side rule](https://en.wikipedia.org/wiki/Off-side_rule).  
+
+---
+
+## Control flow
+
+* Conditional control flow, also known as an "if statement":  
+  <pre>
+  a = 4
+  b = 7
+  c = (a * b) + 1
+  &nbsp;&nbsp;
+  if a % 2 == 0 :
+    print("even")
+  else :
+    print("odd")
+  </pre>
+* What is going to print on the terminal window the previous
+  Python code "even" or "odd"?
+
+---
+
+## Control flow
+
+* Iterative control flow, also known as a "while statement" or "loop":
+  <pre>
+  i = 0
+  s = 0
+  while i < 10 :
+    i = i + 1
+    s = s + i
+  &nbsp;&nbsp;
+  print(s)
+  <pre>
+* What is it doing the previous code block with respect to the variable `s`?
+
+---
+
+## Problem solving
+
+* Problem:  
+  &nbsp;&nbsp;
+  _"Write a program in Python that sums the first 10 natural numbers."_  
+  &nbsp;&nbsp;
+--
+  _"Write a program in Python that calculates the incidence of COVID19."_  
+  &nbsp;&nbsp;
+--
+  _"Write a program in Python that finds DNA mutations associated with cancer."_  
+  &nbsp;&nbsp;
+--
+.pull-left[
+  _"Write a program in Python that stiches together data collected from
+  telescopes around the globe to produce an image of a black hole."_
+
+  .footer[
+  Image from an article in the New York Times in Spanish at  
+  https://www.nytimes.com/es/2019/04/15/espanol/katie-bouman-agujero-negro.html
+  ]
+]
+.pull-right[
+![:scale 70%](img/KatieBoumanNYT.png)
 ]
 
+---
+
+## Problem solving
+
+* Problem:  
+  &nbsp;&nbsp;
+  _"Write a program in Python that sums the first 10 natural numbers."_
+
+--
+
+.pull-left[
+![:scale 65%](img/IKEABox.jpg)
+]
+.pull-right[
+![:scale 45%](img/IKEABedsideTable.png)
+]
+
+--
+
+![](img/IKEAManUnhappy.png)
 
 ---
 
-## Git branching
+## Problem solving
 
-* Finally, to merge the changes from the `testing` branch into the default
-  `master` branch we should use the following command.
+* Problem:  
+  &nbsp;&nbsp;
+  _"Write a program in Python that sums the first 10 natural numbers."_
+
+.pull-left[
+![:scale 65%](img/IKEABox.jpg)
+]
+.pull-right[
+![:scale 45%](img/IKEABedsideTable.png)
+]
+
+![](img/IKEAManHappy.png)
+
+---
+
+## Problem solving
+
+* Problem:  
+  &nbsp;&nbsp;
+  _"Write a program in Python that sums the first 10 natural numbers."_  
+
+.pull-left[
+![](img/IKEABedsideTableInstructions.jpg)
+]
+.pull-right[
+![:scale 45%](img/IKEABedsideTable.png)
+]
+
+--
+
+* To figure out an algorithm, which you will end up writing it up as a
+  program in Python, **you need first to come up with an schematic approach**.
+
+---
+
+## Problem solving
+
+* Problem:  
+  &nbsp;&nbsp;
+  _"Write a program in Python that sums the first 10 natural numbers."_  
+  &nbsp;&nbsp;
+* Schematic approach:
+
+![:scale 60%](img/sum1to10.png)
+
+---
+
+## Problem solving
+
+* Implementation of the schematic approach:
   <pre>
-  $ git merge testing
-  </pre>
-
-![:scale 100%](img/merged-testing.png)
-
-* We may want to delete the `testing` branch as follows.
+  i = 0  ## initial condition: should happen before looping
+  s = 0  ## initial condition: should happen before looping
+  while i < 10 : ## final condition: should not happen when looping
+    i = i + 1    ## invariant condition: always happens when looping
+    s = s + i    ## invariant condition: always happens when looping
+  &nbsp;&nbsp;
+  print(s)
   <pre>
-  $ git branch -d testing
-  </pre>
-
----
-
-## Social coding with GitHub
-
-* [GitHub](https://github.com) is a company providing hosting services for
-  software development using the Git VCS since 2008. In 2018, GitHub was
-  acquired by [Microsoft](https://microsoft.com).  
-  &nbsp;&nbsp;
-* GitHub provides
-  [social media-like features](https://docs.github.com/en/get-started/quickstart/be-social)
-  that allow users to do different kinds of interactions, such as:
-  * Open **issues** in a repository to report bugs, ask questions or request new features.
-  * **Fork** a repository from a different user to introduce your own changes.
-  * Use **pull requests** to propose changes to files in the repository.
-  * **Watch** changes in a repository.
-  * **Follow** updates from other users.
-  * **Stargaze** repositories from other users.
-* According to its [Wikipedia page](https://en.wikipedia.org/wiki/GitHub),
-  GitHub has as of June 2022, over 83 million users and more than 200 million
-  repositories, making it the largest host of source code in the world.
-
----
-
-## GitHub and the default branch
-
-* The **default** branch is considered the "base" branch in a repository,
-  against which all pull requests and code commits are automatically made,
-  unless a different branch is specified.  
-  &nbsp;&nbsp;
-* Following the original git implementation, the default branch at GitHub was
-  called **master**.  
-  &nbsp;&nbsp;
-* On past October 1st, 2020, GitHub started to
-  [rename](https://github.com/github/renaming) the default branch from _master_
-  to **main** to use a more inclusive term that avoids any association with
-  slavery. You can read more about this in the article
-  _Tech Confronts Its Use of the Labels ‘Master’ and ‘Slave’_, published in
-  June 2020 in the
-  [_Wired_ magazine](https://www.wired.com/story/tech-confronts-use-labels-master-slave).  
-  &nbsp;&nbsp;
-* When creating a new repository in GitHub, the system is going to propose you
-  to use **main** as the default branch.
 
 ---
 
 ## Concluding remarks
 
-* Version control allows you to keep track of your own changes and revert to a
-  previous version of them, if necessary.  
+* Spaces ([indentation](https://en.wikipedia.org/wiki/Indentation_style))
+  and newlines are important in Python to define control flow statements.  
   &nbsp;&nbsp;
-* Distributed version control systems such as Git facilitate working with
-  multiple concurrent, convergent or divergent versions of the same files
-  through its branching capabilities.  
+--
+
+* Syntax must be precise, otherwise we will encounter **syntax errors**.  
   &nbsp;&nbsp;
-* Using a remote repository in GitHub enables social coding features that
-  facilitate and speed up team work.  
+--
+
+* Syntax errors are straightforward to correct, conceptual errors (when we
+  do not obtain the right result) are much more difficult. We need to solve
+  the problem correctly.  
   &nbsp;&nbsp;
-* The [Pro Git book](https://git-scm.com/book) is freely accessible online
-  and contains all details about Git. It includes translations to several
-  languages, including [Spanish](https://git-scm.com/book/es).  
+--
+
+* **Problem solving is key to learn programming**.  
   &nbsp;&nbsp;
-* Git and GitHub have become an academic and industry standard for hosting
-  software development and distribution. Knowing how to use them is an
-  increasingly appreciated skill in both, the academic and the industry
-  environments.
+--
 
----
+* The right way to tackle a problem is to come up with an **schematic approach**
+  on paper, blackboard, etc.  
+  &nbsp;&nbsp;
+--
 
-## GitHub branding with the Octocat
+* There will be always a problem that is difficult enough for us that we will not
+  be able to solve it correctly without an **schematic approach**.  
+  &nbsp;&nbsp;
+--
 
-.pull-left[
-* Long before GitHub was bought in 2018 by Microsoft for 7.5 billion dollar,
-  [Simon Oxley](https://en.wikipedia.org/wiki/Simon_Oxley), the designer of
-  the [Twitter logo](https://about.twitter.com/en/who-we-are/brand-toolkit),
-  made a creation called the "Octopuss" (combination of octopus and pussycat)
-  and put it for sale at the [iStockphoto website](https://www.istockphoto.com).
-]
-.pull-right[
-![:scale 80%](img/octocat.jpg)
-]
-* GitHub bought this original "Octopuss" to put use it in a fun error page for
-  their website and with the help of [Cameron McEfee](https://cameronmcefee.com)
-  rename it as the "Octocat" and turn it into a worldwide (nerdy) brand. Full
-  story [here](https://cameronmcefee.com/work/the-octocat).
-
-  ![](img/404.jpg)
+* **The only way to learn problem solving is by solving problems**.
