@@ -5,6 +5,7 @@
     xaringan::moon_reader:
       nature:
         beforeInit: js/macros.js
+        countIncrementalSlides: false
       self_contained: true
       css: [default, default-fonts, ninjutsu, css/upf.css]
       seal: false
@@ -26,15 +27,15 @@ class: title-slide, middle, center
 
 ## Robert Castelo
 [robert.castelo@upf.edu](mailto:robert.castelo@upf.edu)
-### Dept. of Experimental and Health Sciences
+### Dept. of Medicine and Life Sciences
 ### Universitat Pompeu Fabra
 
 <br>
 
 ## Fundamentals of Computational Biology
 ### BSc on Human Biology
-### UPF School of Health and Life Sciences
-### Academic Year 2023-2024
+### UPF School of Medicine and Life Sciences
+### Academic Year 2024-2025
 
 ---
 
@@ -57,7 +58,7 @@ class: title-slide, middle, center
   an end state, in which we obtain the result.
 --
 
-![:scale 55%](img/gestiocasoscovid19.png)
+[![:scale 55%](img/gestiocasoscovid19.png)](img/gestiocasoscovid19.png)
 .footer[
 [Gestió de casos COVID-19 als centres educatius](https://documents.espai.educacio.gencat.cat/IPCNormativa/Protocol-Gestio-casos-rev.pdf),
 Dept. de Salut, Generalitat de Catalunya, 9 de setembre de 2020.
@@ -380,7 +381,7 @@ two code blocks below.
 --
 
 * To figure out an algorithm, which you will end up writing it up as a
-  program in Python, **you need first to come up with an schematic approach**.
+  program in Python, **you need first to come up with an schematic diagram**.
 
 ---
 
@@ -390,7 +391,7 @@ two code blocks below.
   &nbsp;&nbsp;
   _"Write a program in Python that sums the first 10 natural numbers."_  
   &nbsp;&nbsp;
-* Schematic approach:
+* Schematic diagram:
 
 ![:scale 60%](img/sum1to10.png)
 
@@ -398,7 +399,7 @@ two code blocks below.
 
 ## Problem solving
 
-* Implementation of the schematic approach:
+* Implementation of the schematic diagram:
   <pre>
   i = 0  ## initial condition: should happen before looping
   s = 0  ## initial condition: should happen before looping
@@ -432,13 +433,13 @@ two code blocks below.
   &nbsp;&nbsp;
 --
 
-* The right way to tackle a problem is to come up with an **schematic approach**
+* The right way to tackle a problem is to come up with an **schematic diagram**
   on paper, blackboard, etc.  
   &nbsp;&nbsp;
 --
 
 * There will be always a problem that is difficult enough for us that we will not
-  be able to solve it correctly without an **schematic approach**.  
+  be able to solve it correctly without an **schematic diagram**.  
   &nbsp;&nbsp;
 --
 
